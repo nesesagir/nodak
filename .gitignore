@@ -1,0 +1,67 @@
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env
+.env*.local
+
+# credentials / signing (never commit)
+credentials.json
+*.keystore
+google-services.json
+
+# typescript
+*.tsbuildinfo
+
+# generated native folders
+/ios
+/android
+
+# local / agent notes (not part of the product repo)
+.claude/
+CLAUDE.md
+AGENTS.md
+docs/
+
+# legacy brand experiments (kept locally, not published)
+assets/nodus-*
+assets/nodak-logo.png
+assets/nodak-mark-liked.png
+assets/nodak-mark.svg
+assets/sounds/error.wav
+
+# one-off logo tooling with machine-local paths
+scripts/build-final-icon.js
+scripts/build-nodak-mark-svg.js
+scripts/emphasize-annotations.js
+scripts/enlarge-nodak-logo.js
+scripts/finalize-nodak-logo.js
+scripts/remove-nodak-text.js
+scripts/render-nodak-mark.js
