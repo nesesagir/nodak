@@ -2,13 +2,13 @@
 
 Mobile number-logic puzzle game built with Expo and React Native.
 
-Status: in development
+Android: Google Play review is in progress. The store link will be added here when the listing is live.
 
 <p align="center">
   <img src="./assets/nodak-mark.png" width="180" alt="Nodak icon" />
 </p>
 
-Nodak is a minimalist mobile puzzle game focused on spatial reasoning. Each board asks the player to place digits by interpreting distance-based clues and solving the grid with logic, not guesswork.
+Nodak is a mobile puzzle game: fill a grid using distance clues between matching digits.
 
 ## Game idea
 
