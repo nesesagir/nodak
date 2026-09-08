@@ -1,22 +1,30 @@
-export type RewardedAdResult = 'rewarded' | 'dismissed' | 'failed';
-export type InterstitialResult = 'shown' | 'skipped' | 'failed';
+import { Platform } from 'react-native';
+import type { InterstitialResult, RewardedAdResult } from './types';
 
-let winsSinceAd = 0;
+export type { InterstitialResult, RewardedAdResult };
+
+export async function initAds(): Promise<void> {
+  if (Platform.OS === 'web') return;
+  try {
+    const native = await import('./rewardedNative');
+    await native.initNativeAds();
+  } catch {}
+}
 
 export async function showRewardedHintAd(): Promise<RewardedAdResult> {
-  await new Promise((r) => setTimeout(r, 900));
-  return 'rewarded';
+  if (Platform.OS === 'web') return 'failed';
+  try {
+    const native = await import('./rewardedNative');
+    return await native.showRewardedNative();
+  } catch {
+    return 'failed';
+  }
 }
 
 export async function maybeShowVictoryInterstitial(): Promise<InterstitialResult> {
-  winsSinceAd += 1;
-  if (winsSinceAd < 2) return 'skipped';
-  winsSinceAd = 0;
-  await new Promise((r) => setTimeout(r, 700));
-  return 'shown';
+  return 'skipped';
 }
 
 export async function maybeShowGameOverInterstitial(): Promise<InterstitialResult> {
-  await new Promise((r) => setTimeout(r, 700));
-  return 'shown';
+  return 'skipped';
 }

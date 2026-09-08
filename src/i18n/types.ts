@@ -55,4 +55,6 @@ export type TranslationKey =
   | 'continueTitle'
   | 'continueBody'
   | 'continueWatch'
-  | 'continueSec';
+  | 'continueSec'
+  | 'rateApp'
+  | 'rateAppHint';

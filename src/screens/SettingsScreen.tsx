@@ -11,6 +11,7 @@ import {
   THEMES,
   type ThemeId,
 } from '../settings/themes';
+import { openPlayStoreListing } from '../storeLinks';
 import { spacing } from '../theme/tokens';
 import { useAppColors } from '../theme/useAppColors';
 import type { RootStackParamList } from '../navigation/types';
@@ -208,6 +209,20 @@ export function SettingsScreen() {
             ))}
           </View>
         </View>
+
+        <Text style={[styles.section, { color: colors.inkMuted }]}>{t('rateApp')}</Text>
+        <Pressable
+          onPress={() => {
+            void openPlayStoreListing();
+          }}
+          style={[
+            styles.resetBtn,
+            { borderColor: colors.gridLine, backgroundColor: colors.surface },
+          ]}
+        >
+          <Text style={[styles.resetText, { color: colors.ink }]}>{t('rateApp')}</Text>
+        </Pressable>
+        <Text style={[styles.hint, { color: colors.inkMuted }]}>{t('rateAppHint')}</Text>
       </ScrollView>
     </Screen>
   );

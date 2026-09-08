@@ -14,6 +14,10 @@ import { Screen } from '../components/ui/Screen';
 import { getLevelCounts } from '../data/levelsCatalog';
 import { useGame } from '../game/GameContext';
 import { useSettings } from '../settings/SettingsContext';
+import {
+  hasSeenHowToPlay,
+  markHowToPlaySeen,
+} from '../storage/onboarding';
 import { spacing } from '../theme/tokens';
 import { useAppColors } from '../theme/useAppColors';
 import type { RootStackParamList } from '../navigation/types';
@@ -36,6 +40,19 @@ export function HomeScreen() {
     brandY.value = withTiming(0, { duration: 560, easing: Easing.out(Easing.cubic) });
     actionsOp.value = withDelay(160, withTiming(1, { duration: 480 }));
   }, [actionsOp, brandOp, brandY]);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const seen = await hasSeenHowToPlay();
+      if (cancelled || seen) return;
+      await markHowToPlaySeen();
+      if (!cancelled) navigation.navigate('HowToPlay');
+    })().catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [navigation]);
 
   const brandStyle = useAnimatedStyle(() => ({
     opacity: brandOp.value,

@@ -1,9 +1,11 @@
+import { useEffect } from 'react';
 import { useFonts as useDmSans, DMSans_400Regular, DMSans_500Medium } from '@expo-google-fonts/dm-sans';
 import { useFonts as useFraunces, Fraunces_600SemiBold } from '@expo-google-fonts/fraunces';
 import { StatusBar } from 'expo-status-bar';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { initAds } from './src/ads/ads';
 import { SoundGate } from './src/audio/SoundGate';
 import { GameProvider } from './src/game/GameContext';
 import { RootNavigator } from './src/navigation/RootNavigator';
@@ -16,6 +18,10 @@ const bootBg = colors.bg;
 
 function AppShell() {
   const { isDark, ready } = useSettings();
+
+  useEffect(() => {
+    void initAds();
+  }, []);
 
   if (!ready) {
     return (

@@ -67,6 +67,8 @@ const tr: Record<TranslationKey, string> = {
   continueBody: 'Reklam izleyerek tahtaya dönebilirsiniz.',
   continueWatch: 'Reklam izle · devam',
   continueSec: 'sn',
+  rateApp: 'Uygulamayı değerlendir',
+  rateAppHint: 'Play Store’da puan verin.',
 };
 
 const en: Record<TranslationKey, string> = {
@@ -125,6 +127,8 @@ const en: Record<TranslationKey, string> = {
   continueBody: 'Watch an ad to keep this board.',
   continueWatch: 'Watch ad · continue',
   continueSec: 'sec',
+  rateApp: 'Rate the app',
+  rateAppHint: 'Leave a rating on Google Play.',
 };
 
 const de: Record<TranslationKey, string> = {
@@ -183,6 +187,8 @@ const de: Record<TranslationKey, string> = {
   continueBody: 'Werbung sehen und dieses Brett behalten.',
   continueWatch: 'Werbung · weiter',
   continueSec: 'Sek',
+  rateApp: 'App bewerten',
+  rateAppHint: 'Bewertung im Play Store hinterlassen.',
 };
 
 const es: Record<TranslationKey, string> = {
@@ -242,6 +248,8 @@ const es: Record<TranslationKey, string> = {
   continueBody: 'Mira un anuncio para quedarte en este tablero.',
   continueWatch: 'Ver anuncio · seguir',
   continueSec: 's',
+  rateApp: 'Valorar la app',
+  rateAppHint: 'Deja tu valoración en Google Play.',
 };
 
 export const TRANSLATIONS: Record<LangId, Record<TranslationKey, string>> = {

@@ -44,6 +44,17 @@ google-services.json
 /ios
 /android
 
+# local Play builds (large binaries)
+play-store/builds/
+
+# local scratch / marketing exports (not product source)
+linkedin-covers/
+play-screenshots/
+uygulama resimleri/
+scripts/capture-play-screens.js
+scripts/make-store-screenshots.js
+scripts/play-screenshots/
+
 # local / agent notes (not part of the product repo)
 .claude/
 CLAUDE.md
