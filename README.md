@@ -39,7 +39,7 @@ Fill a 6×6 or 8×8 board with digits `1` to `4`. Each digit must sit exactly th
   <img src="./assets/screenshots/feature-graphic.png" width="640" alt="Nodak Google Play feature graphic" />
 </p>
 
-Play Console listing copy and checklist: [`play-store/`](./play-store/).
+Store listing copy: [`play-store/`](./play-store/).
 
 ## Setup
 
