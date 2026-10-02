@@ -1,8 +1,13 @@
-import { Audio, type AVPlaybackSource } from 'expo-av';
+import {
+  createAudioPlayer,
+  setAudioModeAsync,
+  type AudioPlayer,
+  type AudioSource,
+} from 'expo-audio';
 
 export type SfxId = 'victory' | 'error' | 'reject' | 'tap' | 'notify';
 
-const SOURCES: Record<Exclude<SfxId, 'error'>, AVPlaybackSource> = {
+const SOURCES: Record<Exclude<SfxId, 'error'>, AudioSource> = {
   victory: require('../../assets/sounds/victory.wav'),
   reject: require('../../assets/sounds/reject.wav'),
   tap: require('../../assets/sounds/tap.wav'),
@@ -11,7 +16,7 @@ const SOURCES: Record<Exclude<SfxId, 'error'>, AVPlaybackSource> = {
 
 let enabled = true;
 let configured = false;
-const cache = new Map<string, Audio.Sound>();
+const cache = new Map<string, AudioPlayer>();
 
 export function setSoundEnabled(value: boolean): void {
   enabled = value;
@@ -28,12 +33,12 @@ export async function unlockAudio(): Promise<void> {
 async function ensureAudioMode(): Promise<void> {
   if (configured) return;
   try {
-    await Audio.setAudioModeAsync({
-      playsInSilentModeIOS: true,
-      allowsRecordingIOS: false,
-      staysActiveInBackground: false,
-      shouldDuckAndroid: true,
-      playThroughEarpieceAndroid: false,
+    await setAudioModeAsync({
+      playsInSilentMode: true,
+      allowsRecording: false,
+      shouldPlayInBackground: false,
+      shouldRouteThroughEarpiece: false,
+      interruptionMode: 'mixWithOthers',
     });
     configured = true;
   } catch {}
@@ -43,17 +48,15 @@ function resolveId(id: SfxId): Exclude<SfxId, 'error'> {
   return id === 'error' ? 'reject' : id;
 }
 
-async function load(id: Exclude<SfxId, 'error'>): Promise<Audio.Sound | null> {
+async function load(id: Exclude<SfxId, 'error'>): Promise<AudioPlayer | null> {
   const existing = cache.get(id);
   if (existing) return existing;
   try {
     await ensureAudioMode();
-    const { sound } = await Audio.Sound.createAsync(SOURCES[id], {
-      shouldPlay: false,
-      volume: 1,
-    });
-    cache.set(id, sound);
-    return sound;
+    const player = createAudioPlayer(SOURCES[id]);
+    player.volume = 1;
+    cache.set(id, player);
+    return player;
   } catch {
     return null;
   }
@@ -68,20 +71,19 @@ export async function playSfx(id: SfxId): Promise<void> {
   if (!enabled) return;
   const key = resolveId(id);
   try {
-    const sound = await load(key);
-    if (!sound) return;
-    const status = await sound.getStatusAsync();
-    if (status.isLoaded) {
-      await sound.setPositionAsync(0);
-      await sound.playAsync();
-    }
+    const player = await load(key);
+    if (!player) return;
+    await player.seekTo(0);
+    player.play();
   } catch {}
 }
 
 export async function unloadSounds(): Promise<void> {
-  const sounds = [...cache.values()];
+  const players = [...cache.values()];
   cache.clear();
-  await Promise.all(
-    sounds.map((sound) => sound.unloadAsync().catch(() => undefined)),
-  );
+  for (const player of players) {
+    try {
+      player.remove();
+    } catch {}
+  }
 }

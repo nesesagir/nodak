@@ -2,7 +2,7 @@
   "expo": {
     "name": "Nodak",
     "slug": "nodak",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -18,7 +18,7 @@
     },
     "android": {
       "package": "com.nodak.puzzle",
-      "versionCode": 6,
+      "versionCode": 7,
       "permissions": [
         "com.google.android.gms.permission.AD_ID"
       ],
@@ -35,6 +35,15 @@
     },
     "plugins": [
       "expo-font",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "recordAudioAndroid": false,
+          "enableBackgroundPlayback": false,
+          "enableBackgroundRecording": false
+        }
+      ],
       [
         "expo-notifications",
         {
