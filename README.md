@@ -2,7 +2,7 @@
 
 Mobile number-logic puzzle game built with Expo and React Native.
 
-Android closed testing is live on Google Play (`com.nodak.puzzle`). The public store link will be added here when production is approved.
+**Google Play:** [Nodak](https://play.google.com/store/apps/details?id=com.nodak.puzzle) (`com.nodak.puzzle`)
 
 <p align="center">
   <img src="./assets/nodak-mark.png" width="180" alt="Nodak icon" />
